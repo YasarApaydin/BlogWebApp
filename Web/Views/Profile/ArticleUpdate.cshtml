@@ -1,0 +1,60 @@
+﻿@model MakaleGuncelleDto
+
+<main class="mdx-container">
+
+    <header class="mdx-header">
+        <h1>Makale Güncelle</h1>
+        <p>Makalenizin tüm bilgilerini buradan güncelleyebilirsiniz.</p>
+    </header>
+
+    <form asp-controller="Profile" asp-action="ArticleUpdate" method="post" enctype="multipart/form-data" class="mdx-form" novalidate>
+
+        <input type="hidden" asp-for="Id" />
+        <div asp-validation-summary="ModelOnly"></div>
+
+
+        <label asp-for="Baslik"></label>
+        <input asp-for="Baslik" type="text" id="Baslik" name="Baslik" placeholder="Makale başlığı" autocomplete="off" />
+        <span asp-validation-for="Baslik" class="text-danger"></span>
+
+
+
+        <label asp-for="KategoriId">Kategoriler</label>
+        <select id="KategoriId" asp-for="KategoriId" asp-items="@(new SelectList(Model.Kategories,"Id","Ad"))" name="KategoriId" aria-label="Kategori seçimi">
+        </select>
+
+        <div class="row">
+            <!-- Mevcut Resim -->
+            <div class="form-group col-md-6">
+                <label class="d-block" asp-for="Resim.DosyaYolu">
+                    <i class="fas fa-image"></i> Mevcut Kapak Görseli
+                </label>
+                <img src="~/images/@Model.Resim.DosyaYolu" alt="@Model.Baslik"
+                     style="width: 100%; max-height: 20em; object-fit: cover;"
+                     class="img-thumbnail mb-3" />
+            </div>
+
+            <!-- Yeni Resim Seç -->
+            <div class="form-group col-md-6">
+                <label asp-for="Foto">
+                    <i class="fas fa-upload"></i> Yeni Resim Seçiniz
+                </label>
+                <input type="file" asp-for="Foto" accept="image/*" class="form-control" />
+            </div>
+        </div>
+        <label asp-for="Ozet">Özet</label>
+        <textarea asp-for="Ozet" placeholder="Makale içeriğinizi buraya yazabilirsiniz."></textarea>
+        <span asp-validation-for="Ozet" class="text-danger"></span>
+
+
+
+        <label asp-for="Icerik">İçerik</label>
+        <textarea asp-for="Icerik" id="Icerik" name="Icerik" placeholder="Makale içeriğinizi buraya yazabilirsiniz."></textarea>
+        <span asp-validation-for="Icerik" class="text-danger"></span>
+
+        <button type="submit" class="mdx-btn-submit">Güncelle</button>
+
+    </form>
+
+</main>
+

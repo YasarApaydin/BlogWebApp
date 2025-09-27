@@ -1,0 +1,120 @@
+﻿@model UserAddDto
+
+<form asp-controller="User" asp-action="Add" asp-area="Admin" method="post">
+    <div asp-validation-summary="All" style="color:red;"></div>
+    <div class="form-grid">
+
+
+
+
+        <div class="form-group mb-4">
+            <label asp-for="FirstName">
+                <i class="fas fa-heading"></i>
+                Kullanıcı Adı
+            </label>
+            <input type="text" asp-for="FirstName" class="form-input" placeholder="Lütfen Kullanıcı Adınızı Giriniz." wfd-id="id1">
+
+        </div>
+
+
+        <div class="form-group mb-4">
+            <label asp-for="LastName">
+                <i class="fas fa-heading"></i>
+                Kullanıcı Soyadı
+            </label>
+            <input type="text" asp-for="LastName" class="form-input" placeholder="Lütfen Kullanıcı Soyadınızı Giriniz." wfd-id="id1">
+
+        </div>
+
+
+        <div class="form-group mb-4">
+            <label asp-for="Email">
+                <i class="fas fa-heading"></i>
+                Kullanıcı Email Adresi
+            </label>
+            <input type="email" asp-for="Email" class="form-input" placeholder="Lütfen Kullanıcı Emailinizi Giriniz." wfd-id="id1">
+
+        </div>
+
+
+        <div class="form-group mb-4">
+            <label asp-for="PhoneNumber">
+                <i class="fas fa-heading"></i>
+                Kullanıcı Telefon Numarası
+            </label>
+            <input type="tel" asp-for="PhoneNumber" class="form-input" placeholder="Lütfen Kullanıcı Telefon Numaranızı Giriniz." wfd-id="id1">
+
+        </div>
+
+
+
+        
+        <div class="form-group mb-4">
+            <label asp-for="RoleId">
+                <i class="fas fa-heading"></i>
+                Kullanıcı Rolü
+            </label>
+            <select asp-for="RoleId" class="form-control mb-3" asp-items="@(new SelectList(Model.Roles,"Id","Name"))"></select>
+        </div>
+       
+        <div class="form-group">
+            <label asp-for="Password">
+                <i class="fas fa-lock"></i>
+                <span class="animated-text">Şifre</span>
+            </label>
+            <div class="password-input">
+                <input asp-for="Password" type="password"
+                       id="password"
+                       placeholder="••••••••"
+                       autocomplete="current-password" />
+
+                <button type="button" class="toggle-password" aria-label="Şifreyi göster/gizle">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="form-actions">
+
+            <button type="submit" class="btn  btn-primary">
+                <i class="fas fa-save"></i>
+                Kaydet
+            </button>
+        </div>
+    </div>
+
+</form>
+
+
+
+<script>
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleBtn = document.querySelector('.toggle-password');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function () {
+                const passwordInput = document.querySelector('#password');
+                const icon = this.querySelector('i');
+
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+        }
+    });
+
+
+
+</script>

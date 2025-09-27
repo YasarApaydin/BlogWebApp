@@ -1,0 +1,49 @@
+﻿@model UserDto
+<div class="dashboard-header">
+    <div class="header-left">
+        <div class="welcome-text">
+            <h1>Hoş Geldiniz,@Model.FirstName @Model.LastName <span class="text-primary">@Model.Role</span></h1>
+            <p>Son sistem durumunu ve istatistikleri görüntüleyin</p>
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="header-search">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Hızlı arama...">
+        </div>
+        <div class="header-actions">
+            <button class="notification-btn">
+                <i class="far fa-bell"></i>
+                <span class="badge">3</span>
+            </button>
+
+            <div class="profile-menu" onclick="toggleDropdown(this)">
+                <img src="https://ui-avatars.com/api/?name=Admin&background=random" alt="Admin">
+                <span>@Model.Role</span>
+                <i class="fas fa-chevron-down"></i>
+                <div class="dropdown-content">
+                    <a asp-action="Profile" asp-controller="User" asp-area="Admin"><i class="fas fa-user"></i> Profilim</a>
+                    <a asp-action="Index" asp-controller="Home"><i class="fas fa-cog"></i> Siteye Dön</a>
+                    <a asp-action="Index" asp-controller="Home" asp-area=""><i class="fas fa-cog"></i> Anasayfaya Dön</a>
+
+                    <a asp-action="Logout" asp-controller="Auth" asp-area="Admin"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function toggleDropdown(el) {
+        el.classList.toggle("active");
+
+        document.addEventListener("click", function handleClickOutside(event) {
+            if (!el.contains(event.target)) {
+                el.classList.remove("active");
+                document.removeEventListener("click", handleClickOutside);
+            }
+        });
+    }
+</script>

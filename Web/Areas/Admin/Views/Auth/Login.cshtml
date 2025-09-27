@@ -1,0 +1,189 @@
+﻿@model UserLoginDto
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yönetim Paneli - Giriş</title>
+    <link rel="stylesheet" href="~/css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <a href="/" class="back-button" aria-label="Ana Sayfaya Dön">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <h1 class="animated-text">Yönetim Paneli</h1>
+                </div>
+                <p class="animated-text">Hoş geldiniz! Lütfen hesabınıza giriş yapın.</p>
+            </div>
+
+            <form asp-controller="Auth" asp-action="Login" class="login-form" id="loginForm" method="post">
+                <div class="error-message" asp-validation-summary="All"></div>
+                <div class="form-group">
+                    <label asp-for="Email" for="email">
+                        <i class="fas fa-envelope"></i>
+                        <span class="animated-text">E-posta Adresi</span>
+                    </label>
+                    <input asp-for="Email"
+                           type="email"
+                           id="email"
+                           placeholder="ornek@ornek.com"
+                           name="email"
+                           required
+                           autofocus
+                           autocomplete="email">
+                    <div class="error-message" id="emailError"></div>
+                    <span asp-validation-for="Email"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password" for="password">
+                        <i class="fas fa-lock"></i>
+                        <span class="animated-text">Şifre</span>
+                    </label>
+                    <div class="password-input">
+                        <input asp-for="Password" type="password"
+                               id="password"
+                               placeholder="••••••••"
+                               required
+                               autocomplete="current-password">
+                        <span asp-validation-for="Password"></span>
+                        <button type="button" class="toggle-password" aria-label="Şifreyi göster/gizle">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label asp-for="RememberMe" class="remember-me animated-text">
+                        <input asp-for="RememberMe" type="checkbox" id="remember">
+                        <span class="checkmark"></span>
+                        Beni hatırla
+                    </label>
+                    <a href="#" class="forgot-password animated-text">Şifremi unuttum</a>
+                </div>
+
+                <button type="submit" class="login-button animated-button">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Giriş Yap</span>
+                    <div class="button-loader"></div>
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <p class="animated-text">Hesabınız yok mu?</p>
+                <a asp-area="" asp-action="Account" asp-controller="Register" class="register-link animated-text" id="registerLink">Yeni Hesap Oluştur</a>
+            </div>
+
+            <div class="security-info animated-text">
+                <i class="fas fa-lock"></i>
+                <p>Bu bağlantı güvenli ve şifrelidir</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+
+
+        document.querySelector('.toggle-password').addEventListener('click', function () {
+            const passwordInput = document.querySelector('#password');
+            const icon = this.querySelector('i');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+
+        document.getElementById('email').addEventListener('input', function () {
+            const errorDiv = document.getElementById('emailError');
+            if (this.validity.typeMismatch) {
+                errorDiv.textContent = 'Lütfen geçerli bir e-posta adresi girin';
+                errorDiv.classList.add('show');
+            } else {
+                errorDiv.textContent = '';
+                errorDiv.classList.remove('show');
+            }
+        });
+
+
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+
+            const icon = document.createElement('i');
+            icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+
+            const text = document.createElement('span');
+            text.textContent = message;
+
+            notification.appendChild(icon);
+            notification.appendChild(text);
+
+            document.body.appendChild(notification);
+
+            requestAnimationFrame(() => {
+                notification.classList.add('show');
+            });
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 500);
+            }, 3000);
+        }
+
+
+        document.querySelectorAll('.animated-text').forEach((element, index) => {
+            element.style.animationDelay = `${index * 0.1}s`;
+        });
+
+
+        const card = document.querySelector('.login-card');
+
+        document.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const { left, top, width, height } = card.getBoundingClientRect();
+
+            const x = (clientX - left) / width - 0.5;
+            const y = (clientY - top) / height - 0.5;
+
+            requestAnimationFrame(() => {
+                card.style.transform = `
+                    perspective(1000px)
+                    rotateY(${x * 5}deg)
+                    rotateX(${-y * 5}deg)
+                    translateZ(10px)
+                `;
+            });
+        });
+
+        document.addEventListener('mouseleave', () => {
+            requestAnimationFrame(() => {
+                card.style.transform = 'none';
+            });
+        });
+
+    </script>
+</body>
+</html>

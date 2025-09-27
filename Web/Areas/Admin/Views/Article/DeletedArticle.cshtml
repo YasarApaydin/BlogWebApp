@@ -1,0 +1,64 @@
+﻿@model List<MakaleDto>
+<div class="page-header">
+    <div class="header-title">
+        <h2>Cöp Kutusu</h2>
+        <p>Makaleler</p>
+    </div>
+
+</div>
+
+
+<div style="overflow: hidden; " class="responsive-table-container">
+    <table class="table table-responsive" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Başlık</th>
+                <th>Kategori</th>
+                <th>Oluşturulma Tarihi</th>
+                <th>Oluşturan</th>
+                <th>Durum</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr name="@item.Id">
+                    <td>@item.Baslik</td>
+                    <td>@item.Kategori.Ad</td>
+                    <td>@item.YayinlanmaTarihi.ToShortDateString()</td>
+                    <td>
+                        <div class="user-cell">
+                            <img src="https://ui-avatars.com/api/?name=Ahmet+Yılmaz" alt="Ahmet Y.">
+                            <div class="user-info">
+                                <h4>@item.OlusturanKullanici</h4>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="badge-status active">@(item.IsDeleted ? "Pasif":"Aktif")</span>
+                    </td>
+                    <td>
+                        <div class="actions">
+                            <a data-id="@item.Id" asp-area="Admin" asp-controller="Article" asp-action="UndoDelete" asp-route-id="@item.Id" class="action-btn edit-btn">
+                                <i class="bx bx-undo"></i>
+                               Geri Yükle
+                            </a>
+                            @*<a data-id="@item.Id" asp-area="Admin" asp-controller="Article" asp-action="Delete" asp-route-id="@item.Id" style="text-decoration:none;" class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                                Sil
+                            </a>*@
+                        </div>
+                    </td>
+                </tr>
+
+            }
+
+
+
+
+        </tbody>
+    </table>
+</div>
+

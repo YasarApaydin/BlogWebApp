@@ -1,0 +1,77 @@
+﻿@model List<YorumsDto>
+
+<div class="page-header">
+    <div class="header-title">
+        <h2>Makale Yorum Yönetimi</h2>
+        <p>Yorumlar</p>
+    </div>
+
+</div>
+
+
+<div class="responsive-table-container">
+    <table class="table table-responsive" id="articlesTable" cellspacing="0">
+        <thead>
+            <tr>
+                <th>İcerik</th>
+
+                <th>Oluşturulma Tarihi</th>
+                <th>Oluşturan</th>
+                <th>Durum</th>
+
+                <th>Foto</th>
+                @{@if (!User.IsInRole($"{RoleConsts.Admin}"))
+                    {
+                        <th>İşlemler</th>
+                    } }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr name="@item.Id">
+                    <td>@item.Icerik</td>
+
+                    <td>@item.YorumTarihi.ToShortDateString()</td>
+                    <td>@item.OlusturanKullanici</td>
+                    <td>
+                        <span class="badge-status active">@(item.IsDeleted ? "Pasif":"Aktif")</span>
+                    </td>
+
+                    <td>
+                        <div class="user-cell">
+                            <img src="~/images/@item.User.Resim.DosyaYolu" alt="Ahmet Y.">
+                            <div class="user-info">
+                                <h4>@item.OlusturanKullanici</h4>
+                            </div>
+                        </div>
+                    </td>
+
+
+
+                    @{@if (!User.IsInRole($"{RoleConsts.User}"))
+                        {
+                            <td>
+                                <div class="actions">
+                                    
+                                    <a   asp-area="" asp-controller="Blog" asp-action="Detail" asp-route-slug="@item.Makale.Slug" class="action-btn edit-btn">
+                                        <i class="fas fa-edit"></i>
+                                        Makaleye Git
+                                    </a>
+                                    <a data-id="@item.Id" asp-area="Admin" asp-controller="Comment" asp-action="Delete" asp-route-id="@item.Id" style="text-decoration:none;" class="action-btn delete-btn">
+                            <i class="fas fa-trash"></i>
+                            Sil
+                        </a>
+                                </div>
+                            </td>
+                        } }
+                </tr>
+
+            }
+
+
+
+
+        </tbody>
+    </table>
+</div>

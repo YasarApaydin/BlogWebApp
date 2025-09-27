@@ -1,0 +1,89 @@
+﻿@model List<MakaleDto>
+
+<div class="page-header">
+    <div class="header-title">
+        <h2>Makale Yönetimi</h2>
+        <p>Makaleler</p>
+    </div>
+
+    @{@if (!User.IsInRole($"{RoleConsts.User}")) {
+    <div class="header-actions">
+        <form asp-action="Add" asp-area="Admin" asp-controller="Article" method="get">
+            <button class="add-button">
+                <i class="fas fa-plus"></i>
+                <span>Makale Ekle</span>
+            </button>
+        </form>
+    </div>
+    }
+    }
+    
+</div>
+
+
+<div class="responsive-table-container">
+    <table class="table table-responsive" id="articlesTable" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Başlık</th>
+                <th>Kategori</th>
+                <th>Oluşturulma Tarihi</th>
+                <th>Oluşturan</th>
+                <th>Durum</th>
+                @{@if (!User.IsInRole($"{RoleConsts.User}"))
+                {
+                        <th>İşlemler</th>
+                    } }
+                    </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr name="@item.Id">
+                    <td>@item.Baslik</td>
+                    <td>@item.Kategori.Ad</td>
+                    <td>@item.YayinlanmaTarihi.ToShortDateString()</td>
+                    <td>
+                        <div class="user-cell">
+                            <img src="https://ui-avatars.com/api/?name=Ahmet+Yılmaz" alt="Ahmet Y.">
+                            <div class="user-info">
+                                <h4>@item.OlusturanKullanici</h4>
+                            </div>
+                        </div>
+                    </td>
+                   
+                            <td>
+                                <span class="badge-status active">@(item.IsDeleted ? "Pasif":"Aktif")</span>
+                            </td>
+
+                            @{@if (!User.IsInRole($"{RoleConsts.User}"))
+                                {
+                                    <td>
+                                        <div class="actions">
+                                            <a data-id="@item.Id" asp-area="Admin" asp-controller="Article" asp-action="Update" asp-route-id="@item.Id" class="action-btn edit-btn">
+                                                <i class="fas fa-edit"></i>
+                                                Düzenle
+                                            </a>
+                                            <a data-id="@item.Id" asp-area="Admin" asp-controller="Article" asp-action="Delete" asp-route-id="@item.Id" style="text-decoration:none;" class="action-btn delete-btn">
+                                                <i class="fas fa-trash"></i>
+                                                Sil
+                                            </a>
+                                        </div>
+                                    </td>
+                                } }
+                        </tr>
+
+            }
+
+
+
+
+        </tbody>
+    </table>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/articleIndex.js" type="application/ecmascript"></script>
+}
+

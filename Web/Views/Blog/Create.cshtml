@@ -1,0 +1,147 @@
+﻿
+
+@model MakaleYayinlaDto
+ <!-- Page Header -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header-content">
+                    <h1>Yeni Blog Yazısı Oluştur</h1>
+                    <p class="lead">Toplulukla bilgilerinizi paylaşın</p>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Ana Sayfa</a></li>
+                            <li class="breadcrumb-item"><a href="blog.html">Blog</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Yazı Oluştur</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Post Creation Section -->
+<section class="post-creation-section py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Main Editor -->
+            <div class="col-lg-12">
+                <div class="editor-wrapper">
+                    <form id="postForm" asp-controller="Blog" asp-action="Create" method="post" enctype="multipart/form-data" class="post-form">
+                        <!-- Post Title -->
+                        <div asp-validation-summary="ModelOnly"></div>
+
+
+
+
+                        <!-- Sidebar -->
+                        <div class="mb-4">
+                            <div class="editor-sidebar">
+                                <!-- Publishing Options -->
+                                <div class="sidebar-card">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-cog me-2"></i>Yayın Ayarları
+                                    </h5>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label asp-for="KategoriId" class="form-label">Kategori *</label>
+                                            <select required="" asp-for="KategoriId" asp-items="@(new SelectList(Model.Kategories,"Id","Ad"))" class="form-select" id="postCategory" required>
+                                            </select>
+
+                                            <span asp-validation-for="KategoriId" class="text-danger"></span>
+                                        </div>
+
+
+                                        <div class="form-check">
+
+                                            <label class="form-check-label" asp-for="YorumIzin">
+                                                Yorumlara izin ver
+                                            </label>
+                                            <input class="form-check-input" type="checkbox" id="allowComments" asp-for="YorumIzin" checked>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="mb-4">
+                            <label asp-for="Baslik" class="form-label">Yazı Başlığı *</label>
+                            <input asp-for="Baslik" type="text" class="form-control form-control-lg" id="postTitle"
+                                   placeholder="Yazınız için çekici bir başlık girin..." required>
+                        </div>
+                        <span asp-validation-for="Baslik" class="text-danger"></span>
+
+                        <div class="mb-4">
+                            <label asp-for="Ozet" class="form-label">Yazı Özeti *</label>
+                            <textarea asp-for="Ozet" class="form-control" rows="3" placeholder="Yazınızın kısa bir özetini girin (örneğin 2-3 cümle)..."></textarea>
+                        </div>
+                        <span asp-validation-for="Ozet" class="text-danger"></span>
+
+
+                        <!-- Featured Image -->
+                        <div class="mb-4">
+                            <label asp-for="Photo" class="form-label"></label>
+                            <div class="featured-image-upload">
+                                <div class="upload-area" id="uploadArea">
+                                    <div class="upload-placeholder">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <h5>Görsel Yükleyin</h5>
+                                        <p>Dosyayı buraya sürükleyin veya tıklayarak seçin</p>
+                                        <small class="text-muted">JPG, PNG veya GIF formatında, maksimum 5MB</small>
+                                    </div>
+                                    <input type="file" asp-for="Photo" accept="image/*" id="featuredImage" style="display: none;">
+                                </div>
+                                <div class="image-preview" id="imagePreview" style="display: none;">
+                                    <img id="previewImg" src="" alt="Önizleme" class="img-fluid rounded">
+                                    <button type="button" class="btn btn-sm btn-danger remove-image" id="removeImage">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Post Content -->
+
+
+
+
+                        <div class="form-group  mb-4">
+                            <label asp-for="Icerik">
+                                <i class="fas fa-file-alt"></i>
+                                İçerik
+                            </label>
+                            <textarea class="form-control editor-area" placeholder="Yazınızı buraya yazın..." type="text" asp-for="Icerik" style="min-height:300px" class="form-input" wfd-id="id2"></textarea>
+                        </div>
+                        <span asp-validation-for="Icerik" class="text-danger"></span>
+
+
+
+                        <div class="mb-4">
+                            <label for="tags" class="form-label">Etiketler</label>
+                            <input type="text" class="form-control" id="tags" asp-for="Tags"
+                                   placeholder="Etiketleri virgülle ayırarak girin (örn: yazılım, c#)">
+                        </div>
+                        <span asp-validation-for="Tags" class="text-danger"></span>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="btn btn-primary" name="durum" value="Yayinda">
+                                <i class="fas fa-paper-plane me-2"></i>Yayınla
+                            </button>
+                            <button type="submit" class="btn btn-secondary" name="durum" value="Taslak">
+                                <i class="fas fa-save me-2"></i>Taslak Kaydet
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

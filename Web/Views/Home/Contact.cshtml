@@ -1,0 +1,226 @@
+﻿
+@model ContactDto
+@{
+    ViewData["Title"] = "İletişim";
+}
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
+<!-- Sayfa Başlığı -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header-content">
+                    <h1>İletişim</h1>
+                    <p class="lead">Ekibimizle iletişime geçin</p>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Ana Sayfa</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">İletişim</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- İletişim Bölümü -->
+<section class="contact-section py-5">
+    <div class="container">
+        <div class="row">
+            <!-- İletişim Bilgileri -->
+            <div class="col-lg-4 mb-5">
+                <div class="contact-info">
+                    <h3>Bizimle İletişime Geçin</h3>
+                    <p>Blog platformumuz hakkında sorularınız mı var? Aşağıdaki kanallardan bize ulaşabilirsiniz.</p>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h5>E-Posta</h5>
+                            <p>destek@blogsitesi.com</p>
+                            <small>Genellikle 24 saat içinde yanıtlıyoruz</small>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h5>Bizi Arayın</h5>
+                            <p>+90 (212) 555 55 55</p>
+                            <small>Pazartesi - Cuma, 09:00 - 18:00</small>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h5>Ofis Adresimiz</h5>
+                            <p>İnternet Mahallesi<br>İstanbul, Türkiye</p>
+                            <small>Randevu ile ziyaret edebilirsiniz</small>
+                        </div>
+                    </div>
+
+                    <div class="social-links mt-4">
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İletişim Formu -->
+            <div class="col-lg-8">
+                <div class="contact-form-wrapper">
+                    <h3>Bize Mesaj Gönderin</h3>
+                    <p>Aşağıdaki formu doldurarak bizimle kolayca iletişime geçebilirsiniz.</p>
+
+                    <form asp-action="Contact" asp-controller="Home" method="post"  class="contact-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Ad" class="form-label">Ad *</label>
+                                    <input type="text" asp-for="Ad" class="form-control"  required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Soyad" class="form-label">Soyad *</label>
+                                    <input type="text" asp-for="Soyad" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Email" class="form-label">E-Posta Adresi *</label>
+                                    <input type="email" asp-for="Email" class="form-control"  required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Telefon" class="form-label">Telefon Numarası</label>
+                                    <input type="tel" asp-for="Telefon" class="form-control" >
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                 
+
+
+                        <div class="mb-3">
+                            <label asp-for="Mesaj" class="form-label">Mesaj *</label>
+                            <textarea class="form-control" asp-for="Mesaj" placeholder="Size nasıl yardımcı olabiliriz?" required></textarea>
+                        </div>
+
+
+
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-paper-plane me-2"></i>Mesaj Gönder
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SSS Bölümü -->
+<section class="faq-section py-5 bg-light">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h2>Sıkça Sorulan Sorular</h2>
+            <p class="text-muted">Blog platformumuz hakkında merak ettiklerinizi burada bulabilirsiniz</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                Blog yazılarım nasıl analiz ediliyor?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Gelişmiş içerik analiz teknikleriyle yazılarınız okunabilirlik, SEO uyumu ve kullanıcı etkileşimi açısından değerlendiriliyor. Böylece yazılarınızı daha etkili hale getirebilirsiniz.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Verilerim güvende mi?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Kesinlikle. Kişisel verileriniz ve içerikleriniz gizlilik ilkelerimize uygun şekilde korunur. Hiçbir içerik izinsiz paylaşılmaz veya saklanmaz.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Hangi dilleri destekliyorsunuz?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Şu anda Türkçe içerikler tam olarak desteklenmektedir. Yakında daha fazla dil desteği sunacağız.
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                Analizler ne sıklıkla güncelleniyor?
+                            </button>
+                        </h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yeni yazı yayınlandığında sistem analizleri otomatik olarak yeniler. Ayrıca manuel olarak güncelleme yapılabilir.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                                Kurumsal paketleriniz var mı?
+                            </button>
+                        </h2>
+                        <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Evet, ekip ve kurumlar için özel paketlerimiz mevcuttur. Daha detaylı bilgi için satış ekibimizle iletişime geçebilirsiniz.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

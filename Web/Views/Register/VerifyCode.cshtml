@@ -1,0 +1,56 @@
+﻿
+
+@model VerifyCodeDto
+
+<div class="dogrulama-kapsayici">
+    <div class="ikon">✉️</div>
+
+    <h1 class="baslik">Email Doğrulama</h1>
+    <p class="alt-baslik">
+        Email adresinize gönderilen 6 haneli doğrulama kodunu giriniz.<br>
+        <span class="email-goster">@Model.Email</span>
+    </p>
+
+    <div class="mesaj basarili" id="successMessage">
+        ✓ Email adresiniz başarıyla doğrulandı!
+    </div>
+
+    <div class="mesaj hata" id="errorMessage">
+        ⚠️ <span id="errorText"></span>
+    </div>
+
+    <form asp-action="VerifyCode" asp-controller="Register" method="post" id="verificationForm">
+
+        <div asp-validation-summary="All" class="dogrulama-hatalari"></div>
+
+        <div class="kod-alani">
+            <input type="text" class="kod-kutu" maxlength="1" autocomplete="off" name="Digit1">
+            <input type="text" class="kod-kutu" maxlength="1" autocomplete="off" name="Digit2">
+            <input type="text" class="kod-kutu" maxlength="1" autocomplete="off" name="Digit3">
+            <input type="text" class="kod-kutu" maxlength="1" autocomplete="off" name="Digit4">
+            <input type="text" class="kod-kutu" maxlength="1" autocomplete="off" name="Digit5">
+            <input type="text" class="kod-kutu" maxlength="1" autocomplete="off" name="Digit6">
+        </div>
+
+        <input type="hidden" asp-for="Code" id="codeInput" />
+        <input type="hidden" name="Token" value="@ViewBag.Token" />
+        <span asp-validation-for="Code" class="kod-hata"></span>
+
+        <button type="submit" class="dogrulama-butonu" id="verifyBtn">Doğrula</button>
+    </form>
+
+    <form  asp-action="ResendCode" asp-controller="Register" method="post">
+        <div class="yeniden-gonder">
+            <p class="yeniden-gonder-metin">Kod gelmedi mi?</p>
+            <div>
+                <button type="submit"  class="yeniden-gonder-butonu" id="resendBtn">
+                    Kodu Yeniden Gönder
+                </button>
+            </div>
+        </div>
+    </form>
+    
+
+    <a asp-action="Index" asp-controller="Home"  class="geri-donus-linki">← Ana sayfaya dön</a>
+</div>
+<script src="~/js/verifyCode.js"></script>

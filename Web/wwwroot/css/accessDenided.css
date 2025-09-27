@@ -1,0 +1,592 @@
+﻿:root {
+    --primary: #00ff9d;
+    --secondary: #ff3c3c;
+    --background: #0a0a0f;
+    --text: #ffffff;
+    --overlay: rgba(10, 10, 15, 0.9);
+    --grid: rgba(0, 255, 157, 0.1);
+    --glow: rgba(0, 255, 157, 0.5);
+    --error: #ff3c3c;
+    --success: #00ff9d;
+    --warning: #ffaa00;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: var(--background);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    overflow: hidden;
+    position: relative;
+}
+
+.cyber-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: linear-gradient(45deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100% );
+}
+
+.grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 30px 30px;
+    animation: gridMove 20s linear infinite;
+}
+
+.scanning-line {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 2px;
+    background: linear-gradient( 90deg, transparent 0%, var(--primary) 50%, transparent 100% );
+    animation: scanning 3s ease-in-out infinite;
+    box-shadow: 0 0 15px var(--glow);
+}
+
+.glitch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient( 0deg, rgba(0, 0, 0, 0.1) 0px, rgba(0, 0, 0, 0.1) 1px, transparent 1px, transparent 2px );
+    animation: glitchEffect 0.2s infinite;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.error-card {
+    background: rgba(10, 10, 15, 0.8);
+    border-radius: 20px;
+    padding: 40px;
+    position: relative;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 255, 157, 0.1);
+    box-shadow: 0 0 30px rgba(0, 255, 157, 0.1), inset 0 0 30px rgba(0, 255, 157, 0.05);
+    overflow: hidden;
+}
+
+    .error-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient( circle at center, transparent 0%, rgba(0, 255, 157, 0.03) 50%, transparent 100% );
+        animation: cardGlow 10s infinite linear;
+    }
+
+.error-symbol {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px;
+}
+
+.shield-icon,
+.lock-icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: var(--primary);
+}
+
+.shield-icon {
+    opacity: 0.5;
+    animation: shieldPulse 3s infinite ease-in-out;
+}
+
+.lock-icon {
+    animation: lockFloat 2s infinite ease-in-out;
+}
+
+.pulse-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    animation: pulseRing 2s infinite;
+}
+
+.error-content {
+    text-align: center;
+}
+
+.glitch-text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--error);
+    text-transform: uppercase;
+    position: relative;
+    text-shadow: 0 0 10px rgba(255, 60, 60, 0.5);
+    margin-bottom: 20px;
+}
+
+    .glitch-text::before,
+    .glitch-text::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        animation: glitchText 3s infinite linear alternate-reverse;
+    }
+
+    .glitch-text::before {
+        left: 2px;
+        text-shadow: -2px 0 var(--primary);
+        clip: rect(44px, 450px, 56px, 0);
+    }
+
+    .glitch-text::after {
+        left: -2px;
+        text-shadow: 2px 0 var(--secondary);
+        clip: rect(24px, 450px, 36px, 0);
+        animation-delay: 0.1s;
+    }
+
+.error-code {
+    font-size: 6rem;
+    font-weight: 700;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+    .error-code .number {
+        position: relative;
+        display: inline-block;
+        color: var(--text);
+        text-shadow: 0 0 10px var(--glow), 0 0 20px var(--glow), 0 0 40px var(--glow);
+        animation: numberFloat 3s infinite ease-in-out;
+    }
+
+        .error-code .number:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .error-code .number:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+.error-details {
+    margin: 30px 0;
+}
+
+.typing-text {
+    font-family: monospace;
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+    .typing-text::after {
+        content: '|';
+        position: absolute;
+        right: -10px;
+        animation: blink 1s infinite;
+    }
+
+.description {
+    font-size: 1.1rem;
+    color: var(--text);
+    opacity: 0.8;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.security-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--warning);
+    font-size: 0.9rem;
+}
+
+    .info-item i {
+        font-size: 1.2rem;
+    }
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.cyber-button {
+    position: relative;
+    padding: 15px 30px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+    .cyber-button .button-content {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .cyber-button.primary {
+        background: var(--primary);
+        color: var(--background);
+    }
+
+    .cyber-button.secondary {
+        background: transparent;
+        color: var(--primary);
+        border: 2px solid var(--primary);
+    }
+
+.button-borders {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+    .button-borders span {
+        position: absolute;
+        background: var(--primary);
+    }
+
+.border-top {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    animation: borderSlide 2s infinite;
+}
+
+.border-right {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    animation: borderSlide 2s 0.5s infinite;
+}
+
+.border-bottom {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    animation: borderSlide 2s 1s infinite;
+}
+
+.border-left {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    animation: borderSlide 2s 1.5s infinite;
+}
+
+.cyber-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 255, 157, 0.3);
+}
+
+@keyframes gridMove {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(30px);
+    }
+}
+
+@keyframes scanning {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(100vh) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(200vh) rotate(0deg);
+    }
+}
+
+@keyframes glitchEffect {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(1px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardGlow {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shieldPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.3;
+    }
+}
+
+@keyframes lockFloat {
+    0%, 100% {
+        transform: translate(-50%, -50%) translateY(0);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) translateY(-10px);
+    }
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 1;
+    }
+
+    70% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 0;
+    }
+}
+
+@keyframes glitchText {
+    0% {
+        clip: rect(44px, 450px, 56px, 0);
+    }
+
+    5% {
+        clip: rect(24px, 450px, 36px, 0);
+    }
+
+    10% {
+        clip: rect(64px, 450px, 76px, 0);
+    }
+
+    15% {
+        clip: rect(84px, 450px, 96px, 0);
+    }
+
+    20% {
+        clip: rect(14px, 450px, 26px, 0);
+    }
+
+    25% {
+        clip: rect(54px, 450px, 66px, 0);
+    }
+}
+
+@keyframes numberFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes borderSlide {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .error-card {
+        padding: 30px 20px;
+    }
+
+    .glitch-text {
+        font-size: 2rem;
+    }
+
+    .error-code {
+        font-size: 4rem;
+    }
+
+    .error-symbol {
+        width: 100px;
+        height: 100px;
+    }
+
+    .shield-icon,
+    .lock-icon {
+        font-size: 2.5rem;
+    }
+
+    .pulse-ring {
+        width: 80px;
+        height: 80px;
+    }
+
+    .security-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .cyber-button {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .error-card {
+        padding: 20px 15px;
+    }
+
+    .glitch-text {
+        font-size: 1.5rem;
+    }
+
+    .error-code {
+        font-size: 3rem;
+    }
+
+    .typing-text {
+        font-size: 1rem;
+    }
+
+    .description {
+        font-size: 0.9rem;
+    }
+
+    .error-symbol {
+        width: 80px;
+        height: 80px;
+    }
+
+    .shield-icon,
+    .lock-icon {
+        font-size: 2rem;
+    }
+
+    .pulse-ring {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 360px) {
+    .glitch-text {
+        font-size: 1.2rem;
+    }
+
+    .error-code {
+        font-size: 2.5rem;
+    }
+
+    .error-symbol {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 20px;
+    }
+
+    .shield-icon,
+    .lock-icon {
+        font-size: 1.5rem;
+    }
+
+    .pulse-ring {
+        width: 50px;
+        height: 50px;
+    }
+}

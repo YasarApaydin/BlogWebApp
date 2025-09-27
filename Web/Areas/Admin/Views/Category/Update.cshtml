@@ -1,0 +1,32 @@
+﻿@model KategoriGuncelleDto
+
+
+<form asp-controller="Category" asp-action="Update" asp-area="Admin" method="post" id="memberForm">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="form-grid">
+
+        <input type="hidden" asp-for="Id" />
+
+
+        <div class="form-group mb-4">
+            <label asp-for="Ad">
+                <i class="fas fa-heading"></i>
+                Kategori Adı
+            </label>
+            <input type="text" asp-for="Ad" class="form-input" placeholder="Lütfen Kategori İsmini Giriniz." wfd-id="id1">
+
+        </div>
+        <span asp-validation-for="Ad" class="text-danger"></span>
+
+
+
+        <div class="form-actions">
+
+            <button type="submit" class="btn  btn-primary">
+                <i class="fas fa-save"></i>
+                Kaydet
+            </button>
+        </div>
+    </div>
+
+</form>

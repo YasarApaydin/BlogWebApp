@@ -1,0 +1,117 @@
+﻿@model List<MakaleDto>
+
+
+<main class="yl-sayfa">
+
+    <!-- -------- BAŞLIK -------- -->
+    <header class="yl-baslik-kapsayici">
+        <h1 class="yl-baslik">Yayınladığın Makaleler</h1>
+        <p class="yl-altbaslik">Makaleler</p>
+    </header>
+
+    <!-- -------- TABLO -------- -->
+    <div class="yl-tablo-kapsayici">
+        <table class="yl-tablo" id="articlesTable">
+            <thead>
+                <tr>
+                    <th>Başlık</th>
+                    <th>Özet</th>
+                    <th>Kategori</th>
+                    <th>Oluşturulma Tarihi</th>
+
+
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Baslik</td>
+                        <td>@Html.Raw(item.Ozet.ToHtmlWithBreaks())</td>
+                        <td>@item.Kategori.Ad</td>
+                        <td>@item.YayinlanmaTarihi</td>
+
+
+                        <td>
+
+
+
+                            <div class="yl-aksiyonlar">
+                                <a asp-controller="Profile" asp-action="ArticleUpdate" asp-route-slug="@item.Slug"
+                                   class="yl-btn yl-btn--duzenle">
+                                    <i class="fas fa-edit"></i>Düzenle
+                                </a>
+                                <a href="#"
+                                   class="yl-btn yl-btn--sil js-open-delete-modal"
+                                   data-id="@item.Id"
+                                   data-title="@item.Baslik">
+                                    <i class="fas fa-trash"></i> Sil
+                                </a>
+
+
+                                <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Slug"
+                                   class="yl-btn yl-btn--goruntule">
+                                    <i class="fas fa-eye"></i>Görüntüle
+                                </a>
+
+
+
+
+
+
+
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+
+                <!--  Ek satırlar burada  -->
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<!-- Basit ve Şık Modal (GET metoduna göre güncellendi) -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title" id="modalTitle">Makale Sil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage" class="mb-0 text-muted">Bu makaleyi silmek istediğinize emin misiniz?</p>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Vazgeç</button>
+                <a id="deleteConfirmBtn" class="btn btn-danger">Evet, Sil</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+        const deleteButtons = document.querySelectorAll('.js-open-delete-modal');
+        const modalMessage = document.getElementById('modalMessage');
+        const confirmBtn = document.getElementById('deleteConfirmBtn');
+
+        deleteButtons.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const id = this.dataset.id;
+                const title = this.dataset.title;
+
+                modalMessage.textContent = `"${title}" başlıklı makaleyi silmek istiyor musunuz?`;
+
+                // GET metoduna uygun yönlendirme
+                confirmBtn.href = `/Profile/Delete/${id}`;
+
+                modal.show();
+            });
+        });
+    });
+</script>

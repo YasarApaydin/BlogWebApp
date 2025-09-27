@@ -1,0 +1,75 @@
+﻿@model MakaleGuncelleDto
+
+
+<form asp-controller="Article" asp-action="Update" asp-area="Admin" method="post" enctype="multipart/form-data" id="memberForm">
+   <div asp-validation-summary="ModelOnly"></div>
+   <div class="form-grid">
+       <input type="hidden" asp-for="Id" />
+
+
+       <div class="form-group mb-4">
+           <label asp-for="KategoriId">
+               <i class="fas fa-tags"></i>
+               Kategoriler
+           </label>
+           <select asp-for="KategoriId" asp-items="@(new SelectList(Model.Kategories,"Id","Ad"))" class="form-input">
+           </select>
+           <span asp-validation-for="KategoriId" class="text-danger"></span>
+       </div>
+
+       <div class="form-group mb-4">
+           <label asp-for="Baslik">
+               <i class="fas fa-heading"></i>
+               Başlık
+           </label>
+           <input type="text" asp-for="Baslik" class="form-input" wfd-id="id1">
+
+       </div>
+       <span asp-validation-for="Baslik" class="text-danger"></span>
+
+       <div class="form-group ">
+           <label asp-for="Ozet">
+               <i class="fas fa-file-alt"></i>
+               Özet
+           </label>
+           <textarea type="text" asp-for="Ozet" style="min-height:300px" class="form-input" wfd-id="id2"></textarea>
+       </div>
+       <span asp-validation-for="Ozet" class="text-danger"></span>
+
+
+       <div class="form-group ">
+           <label asp-for="Icerik">
+               <i class="fas fa-file-alt"></i>
+               İçerik
+           </label>
+           <textarea type="text" asp-for="Icerik" style="min-height:300px" class="form-input" wfd-id="id2"></textarea>
+       </div>
+       <span asp-validation-for="Icerik" class="text-danger"></span>
+       <div class="row">
+           <div class="form-group  col-md-6">
+               <label class=" d-block" asp-for="Resim.DosyaYolu">
+                   <i class="fas fa-file-alt"></i>
+                   Mevcut Resim
+               </label>
+               <img style="height:20em;width:20em;" class="mb-3" src="~/images/@Model.Resim.DosyaYolu" alt="@Model.Baslik" />
+           </div>
+           <div class="form-group col-md-6">
+               <label asp-for="Foto">
+                   <i class="fas fa-file-alt"></i>
+                   Resim Seçiniz
+               </label>
+               <input type="file" asp-for="Foto" accept="image/*" class="form-control" wfd-id="id2" />
+
+           </div>
+       </div>
+
+       <div class="form-actions">
+
+           <button type="submit" class="btn  btn-primary">
+               <i class="fas fa-save"></i>
+               Kaydet
+           </button>
+       </div>
+   </div>
+
+</form>

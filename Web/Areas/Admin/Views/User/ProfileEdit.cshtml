@@ -1,0 +1,126 @@
+﻿@model UserProfileEditDto
+
+@{ 
+    Layout = null;
+
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="~/css/ProfileEdit.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <a asp-action="Profile" asp-controller="User" asp-area="Admin" class="back-button">
+            <span class="back-icon">←</span>
+            Profile'e Geri Dön
+        </a>
+        <div class="edit-profile-card">
+
+            <form asp-action="ProfileEdit" enctype="multipart/form-data" asp-controller="User" asp-area="Admin" method="post">
+
+
+
+                <div class="profile-header">
+                    <div class="cover-photo-container">
+                        <div class="cover-photo"></div>
+                        <input type="file" accept="image/*" asp-for="Photo" class="change-cover" id="photoInput">
+                        <label for="photoInput">Fotoyu değiştir</label>
+                    </div>
+                    <div class="profile-picture-container">
+                        <img id="profileImagePreview" src="@Model.Resim.DosyaYolu" alt="Profile Picture" class="profile-picture">
+                    </div>
+                </div>
+
+                <div class="edit-sections">
+                    <div class="tabs">
+                        <button class="tab " data-tab="personal">Personal Info</button>
+
+                    </div>
+
+                    <div class="tab-content active" id="personal">
+                        <h2>Personal Information</h2>
+
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-grid">
+
+                          
+
+                            <div class="form-group">
+                                <label asp-for="FirstName">İsim</label>
+                                <input asp-for="FirstName" type="text" class="form-input">
+                                <span asp-validation-for="FirstName"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LastName">Soyisim</label>
+                                <input asp-for="LastName" type="text" class="form-input">
+                                <span asp-validation-for="LastName"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Email">Email</label>
+                                <input disabled asp-for="Email" type="email" class="form-input">
+                                <span asp-validation-for="Email"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PhoneNumber">Phone</label>
+                                <input asp-for="PhoneNumber" type="tel" class="form-input">
+                                <span asp-validation-for="PhoneNumber"></span>
+                            </div>
+
+
+
+
+                            <div class="form-group">
+                                <label asp-for="CurrentPassword">Mevcut Parola</label>
+                                <input asp-for="CurrentPassword" type="password" class="form-input" required>
+                                <span asp-validation-for="CurrentPassword"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="NewPassword">Yeni Parolanız(Opsiyonel)</label>
+                                <input type="password" asp-for="NewPassword" class="form-input">
+                                <span asp-validation-for="NewPassword"></span>
+                            </div>
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="form-actions">
+
+                    <button class="btn save-btn">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('photoInput').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const imgPreview = document.getElementById('profileImagePreview');
+                imgPreview.src = URL.createObjectURL(file);
+            }
+        });
+    </script>
+
+
+</body>
+
+
+</html>

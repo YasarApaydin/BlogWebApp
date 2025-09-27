@@ -1,0 +1,128 @@
+﻿@model UserProfileDto
+@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil</title>
+    <link rel="stylesheet" href="~/css/profil.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <a asp-action="Index" asp-area="Admin" asp-controller="Home" class="back-button">
+            <span class="back-icon">←</span>
+            Panele Geri Dön
+        </a>
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="cover-photo"></div>
+                <img src="@Model.Resim.DosyaYolu" alt="Profile Picture" class="profile-picture">
+                <h1>@Model.FirstName @Model.LastName</h1>
+                <p class="role">@Model.Role</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number">128</span>
+                        <span class="stat-label">Projects</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15</span>
+                        <span class="stat-label">Teams</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">3y+</span>
+                        <span class="stat-label">Experience</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-info">
+                <div class="info-section">
+                    <h2>Personal Information</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Email</label>
+                            <p>@Model.Email</p>
+                        </div>
+                        <div class="info-item">
+                            <label>Phone</label>
+                            <p>@Model.PhoneNumber</p>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+
+
+                <div class="info-section">
+                    <h2>Recent Blog Posts</h2>
+                    <div class="blog-posts">
+                        <article class="blog-post">
+                            <h3>The Future of Cloud Computing</h3>
+                            <p class="post-meta">Published on Jan 15, 2024 • 8 min read</p>
+                            <p class="post-excerpt">Exploring the latest trends in cloud computing and their impact on modern businesses...</p>
+                            <div class="post-stats">
+                                <span>👍 245</span>
+                                <span>💬 23</span>
+                                <span>📌 Featured</span>
+                            </div>
+                        </article>
+                        <article class="blog-post">
+                            <h3>Security Best Practices for DevOps</h3>
+                            <p class="post-meta">Published on Jan 10, 2024 • 12 min read</p>
+                            <p class="post-excerpt">A comprehensive guide to implementing security in your DevOps pipeline...</p>
+                            <div class="post-stats">
+                                <span>👍 189</span>
+                                <span>💬 15</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h2>Account Details</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Username</label>
+                            <p>@Model.UserName</p>
+                        </div>
+                      
+                        <div class="info-item">
+                            <label>Account Status</label>
+                            <p class="status active">@(Model.IsDeleted ? "Pasif" : "Aktif")</p>
+                        </div>
+                        <div class="info-item">
+                            <label>Role</label>
+                            <p>@Model.Role</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h2>Skills & Expertise</h2>
+                    <div class="skills-grid">
+                        <span class="skill-tag">System Administration</span>
+                        <span class="skill-tag">Network Security</span>
+                        <span class="skill-tag">Cloud Computing</span>
+                        <span class="skill-tag">DevOps</span>
+                        <span class="skill-tag">Project Management</span>
+                        <span class="skill-tag">Team Leadership</span>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                       <a asp-action="ProfileEdit"asp-controller="User" asp-area="Admin" class="btn edit-btn">Profili Düzenle</a>
+                    
+                    <button class="btn password-btn">Şifre değiştir</button>
+                    <button class="btn settings-btn">Ayarlar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

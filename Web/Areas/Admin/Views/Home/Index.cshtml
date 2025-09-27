@@ -1,0 +1,288 @@
+﻿@model List<MakaleDto>
+<!-- İstatistikler -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon blue">
+            <i class="fa-solid fa-paper-plane"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Toplam Yayınlanan <br />Makale Sayısı</h3>
+            <h2 id="totalArticleCount"></h2>
+
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon orange">
+            <i class="menu-icon bx bx-category"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Toplam Eklenen <br />Kategori Sayısı</h3>
+            <h2 id="totalCategoryCount"></h2>
+
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon green">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Toplam Aktif <br /> Kullanıcı Sayısı</h3>
+            <h2 id="totalUsersCount"></h2>
+
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon purple">
+            <i class="fas fa-shield-alt"></i>
+        </div>
+        <div class="stat-info">
+            <h3>Toplam Aktif <br />Kullanıcı Yorumu</h3>
+            <h2 id="totalCommentsCount"></h2>
+
+        </div>
+    </div>
+
+ 
+
+</div>
+
+
+
+
+  
+
+
+<!-- Ana Grid -->
+<div class="dashboard-grid">
+    <!-- Gelen İstekler -->
+    <div class="dashboard-card">
+        <div class="card-header">
+            <h2>Gelen İstekler</h2>
+            <div class="card-actions">
+                <button class="refresh-btn" id="refreshBtn">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </div>
+        <div class="requests-grid">
+            <!-- İstek Kartı 1 -->
+            <div class="request-card">
+                <div class="request-header">
+                    <div class="user-info">
+                        <img src="https://ui-avatars.com/api/?name=Ahmet+Yılmaz&background=random" alt="Kullanıcı">
+                        <div class="user-details">
+                            <h4>Ahmet Yılmaz</h4>
+                            <span class="department">Muhasebe Departmanı</span>
+                        </div>
+                    </div>
+                    <span class="request-time">2 dakika önce</span>
+                </div>
+                <div class="request-content">
+                    <div class="request-type">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Yeni Kullanıcı Kaydı</span>
+                    </div>
+                    <p>Sistem erişimi için yeni kullanıcı hesabı talebi</p>
+                </div>
+                <div class="request-actions">
+                    <button class="btn-approve">
+                        <i class="fas fa-check"></i>
+                        Onayla
+                    </button>
+                    <button class="btn-reject">
+                        <i class="fas fa-times"></i>
+                        Reddet
+                    </button>
+                </div>
+            </div>
+
+            <!-- İstek Kartı 2 -->
+            <div class="request-card">
+                <div class="request-header">
+                    <div class="user-info">
+                        <img src="https://ui-avatars.com/api/?name=Mehmet+Kaya&background=random" alt="Kullanıcı">
+                        <div class="user-details">
+                            <h4>Mehmet Kaya</h4>
+                            <span class="department">İK Departmanı</span>
+                        </div>
+                    </div>
+                    <span class="request-time">15 dakika önce</span>
+                </div>
+                <div class="request-content">
+                    <div class="request-type">
+                        <i class="fas fa-key"></i>
+                        <span>Şifre Sıfırlama</span>
+                    </div>
+                    <p>Şifre sıfırlama ve yeni şifre talebi</p>
+                </div>
+                <div class="request-actions">
+                    <button class="btn-approve">
+                        <i class="fas fa-check"></i>
+                        Onayla
+                    </button>
+                    <button class="btn-reject">
+                        <i class="fas fa-times"></i>
+                        Reddet
+                    </button>
+                </div>
+            </div>
+
+            <!-- İstek Kartı 3 -->
+            <div class="request-card">
+                <div class="request-header">
+                    <div class="user-info">
+                        <img src="https://ui-avatars.com/api/?name=Ayşe+Demir&background=random" alt="Kullanıcı">
+                        <div class="user-details">
+                            <h4>Ayşe Demir</h4>
+                            <span class="department">Satış Departmanı</span>
+                        </div>
+                    </div>
+                    <span class="request-time">1 saat önce</span>
+                </div>
+                <div class="request-content">
+                    <div class="request-type">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Yetki Yükseltme</span>
+                    </div>
+                    <p>Yönetici yetkisi için yetki yükseltme talebi</p>
+                </div>
+                <div class="request-actions">
+                    <button class="btn-approve">
+                        <i class="fas fa-check"></i>
+                        Onayla
+                    </button>
+                    <button class="btn-reject">
+                        <i class="fas fa-times"></i>
+                        Reddet
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sağ Taraf Grid -->
+    <div class="right-column">
+        <!-- Hızlı İşlemler -->
+        <div class="dashboard-card quick-actions">
+            <div class="card-header">
+                <h2>Hızlı İşlemler</h2>
+            </div>
+            <div class="quick-actions-grid">
+                <button class="quick-action-btn">
+                    <div class="action-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <span>Yeni Kullanıcı</span>
+                    <small>Kullanıcı ekle</small>
+                </button>
+
+                <button class="quick-action-btn">
+                    <div class="action-icon">
+                        <i class="fas fa-user-edit"></i>
+                    </div>
+                    <span>Kullanıcı Düzenle</span>
+                    <small>Bilgileri güncelle</small>
+                </button>
+
+                <button class="quick-action-btn">
+                    <div class="action-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <span>Şifre İşlemleri</span>
+                    <small>Şifre sıfırla</small>
+                </button>
+
+                <button class="quick-action-btn">
+                    <div class="action-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <span>Ayarlar</span>
+                    <small>Sistem ayarları</small>
+                </button>
+            </div>
+        </div>
+
+        <!-- Kullanıcı Aktiviteleri -->
+        <div class="dashboard-card">
+            <div class="card-header">
+                <h2>Kullanıcı Aktiviteleri</h2>
+                <div class="card-actions">
+                    <button class="refresh-btn" id="refreshActivities">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="activities-list">
+                <div class="activities">
+                    @foreach (var item in Model)
+                    {
+
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-key"></i>
+                            </div>
+                            <div class="activity-details">
+                                <div class="activity-user">
+                                    <img src="https://ui-avatars.com/api/?name=Ahmet+Yılmaz&background=random" alt="Ahmet Yılmaz">
+                                    <span>@item.OlusturanKullanici</span>
+                                </div>
+                                <h3>@item.Baslik</h3>
+                                <p>@item.Icerik</p>
+                                <span class="activity-time">@item.YayinlanmaTarihi</span>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+
+                </div>
+            </div>
+    </div>
+</div>
+<footer class="dashboard-footer">
+    <div class="footer-content">
+        <div class="footer-left">
+            <p>&copy; 2024 Admin Panel. Tüm hakları saklıdır.</p>
+        </div>
+        <div class="footer-center">
+            <nav class="footer-nav">
+                <a href="#">Gizlilik Politikası</a>
+                <a href="#">Kullanım Şartları</a>
+                <a href="#">Yardım</a>
+                <a href="#">İletişim</a>
+            </nav>
+        </div>
+        <div class="footer-right">
+            <div class="footer-stats">
+                <span><i class="fas fa-server"></i> Sunucu Durumu: <strong class="text-success">Aktif</strong></span>
+                <span><i class="fas fa-clock"></i> Son Güncelleme: <strong>2 dk önce</strong></span>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script>
+        var app = app || {}
+        app.Urls = app.Urls || {}
+
+
+    app.Urls.totalArticleCountUrl = "@(Url.Action("TotalArticleCount", "Home"))";
+
+    app.Urls.totalCategoryCountUrl = "@(Url.Action("TotalCategoryCount", "Home"))";
+
+
+    app.Urls.totalUsersCountUrl = "@(Url.Action("TotalUsersCount", "Home"))";
+
+    app.Urls.totalCommentsCountUrl = "@(Url.Action("TotalCommentsCount", "Home"))";
+
+    
+
+</script>
+
+<script src="~/js/dashboardIndex.js"></script>

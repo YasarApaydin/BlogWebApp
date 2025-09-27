@@ -1,0 +1,82 @@
+﻿@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erişim Reddedildi</title>
+    <link rel="stylesheet" href="~/css/accessDenided.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="cyber-background">
+        <div class="grid-overlay"></div>
+        <div class="scanning-line"></div>
+        <div class="glitch-overlay"></div>
+    </div>
+
+    <div class="container">
+        <div class="error-card">
+            <div class="error-symbol">
+                <i class="fas fa-shield-alt shield-icon"></i>
+                <i class="fas fa-lock lock-icon"></i>
+                <div class="pulse-ring"></div>
+            </div>
+
+            <div class="error-content">
+                <div class="glitch-text" data-text="ERİŞİM ENGELLENDİ">ERİŞİM ENGELLENDİ</div>
+                <div class="error-code">
+                    <span class="number">4</span>
+                    <span class="number">0</span>
+                    <span class="number">3</span>
+                </div>
+
+                <div class="error-details">
+                    <div class="typing-text">Sistem Mesajı: Yetkisiz Erişim Tespit Edildi</div>
+                    <p class="description">Bu alana erişim için gerekli yetkilendirmeye sahip değilsiniz.</p>
+                    <div class="security-info">
+                        <div class="info-item">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Güvenlik Seviyesi: Yüksek</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-user-shield"></i>
+                            <span>Erişim Durumu: Engellendi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="/" class="cyber-button primary">
+                        <span class="button-content">
+                            <i asp-area="Admin" asp-controller="Home" asp-action="Index" class="fas fa-home"></i>
+                            Ana Sayfa
+                        </span>
+                        <span class="button-borders">
+                            <span class="border-top"></span>
+                            <span class="border-right"></span>
+                            <span class="border-bottom"></span>
+                            <span class="border-left"></span>
+                        </span>
+                    </a>
+                    <a href="/contact" class="cyber-button secondary">
+                        <span class="button-content">
+                            <i class="fas fa-headset"></i>
+                            Destek
+                        </span>
+                        <span class="button-borders">
+                            <span class="border-top"></span>
+                            <span class="border-right"></span>
+                            <span class="border-bottom"></span>
+                            <span class="border-left"></span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

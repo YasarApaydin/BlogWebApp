@@ -1,0 +1,50 @@
+# Build output
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code settings
+.vscode/
+
+# Rider settings
+.idea/
+
+# ASP.NET Secrets & Local settings
+appsettings.json
+appsettings.Development.json
+
+# Logs
+*.log
+
+# Database files
+*.mdf
+*.ldf
+*.db
+
+# Publish
+*.publish.xml
+
+# NuGet
+*.nupkg
+.nuget/
+
+# IIS Express
+.vs/
+*.vspscc
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# JetBrains Rider
+.idea/
+
+# OS Generated
+.DS_Store
+Thumbs.db

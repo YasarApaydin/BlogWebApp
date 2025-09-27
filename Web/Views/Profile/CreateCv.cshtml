@@ -1,0 +1,310 @@
+﻿<div class="cv-builder-container">
+    <!-- Form Section -->
+    <div class="cv-form-panel">
+        <div class="cv-form-header">
+            <h1 class="cv-form-title">✨ CV Oluşturucu</h1>
+            <p class="cv-form-subtitle">Profesyonel CV'nizi dakikalar içinde oluşturun</p>
+        </div>
+
+        <!-- Personal Info -->
+        <div class="cv-form-section">
+            <h3 class="cv-section-header">
+                <span class="cv-section-icon">👤</span>
+                Kişisel Bilgiler
+            </h3>
+
+            <!-- Photo Upload -->
+            <div class="cv-photo-uploader">
+                <div class="cv-photo-preview" onclick="document.getElementById('photoInput').click()">
+                    <span id="photoPlaceholder" class="cv-photo-placeholder">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    <img id="photoPreview" class="cv-photo-image" style="display: none;">
+                </div>
+                <input type="file" id="photoInput" class="cv-photo-input" accept="image/*" onchange="handlePhotoUpload(event)">
+                <button type="button" class="cv-photo-btn" onclick="document.getElementById('photoInput').click()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <polyline points="17,8 12,3 7,8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <line x1="12" y1="3" x2="12" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Fotoğraf Seç
+                </button>
+            </div>
+
+            <div class="cv-input-group">
+                <input type="text" id="fullName" class="cv-input-field" placeholder="Ad Soyad" onchange="updatePreview()">
+                <input type="text" id="jobTitle" class="cv-input-field" placeholder="Meslek/Pozisyon" onchange="updatePreview()">
+            </div>
+
+            <div class="cv-input-group">
+                <input type="email" id="email" class="cv-input-field" placeholder="E-posta" onchange="updatePreview()">
+                <input type="tel" id="phone" class="cv-input-field" placeholder="Telefon" onchange="updatePreview()">
+            </div>
+
+            <input type="text" id="address" class="cv-input-field" placeholder="Adres" onchange="updatePreview()">
+            <input type="url" id="website" class="cv-input-field" placeholder="Website/LinkedIn" onchange="updatePreview()">
+            <textarea id="summary" class="cv-textarea-field" placeholder="Kısa Özet" rows="4" onchange="updatePreview()"></textarea>
+        </div>
+
+        <!-- Experience -->
+        <div class="cv-form-section">
+            <h3 class="cv-section-header">
+                <span class="cv-section-icon">💼</span>
+                İş Deneyimi
+            </h3>
+            <button class="cv-add-btn" onclick="addExperience()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                Deneyim Ekle
+            </button>
+            <div id="experiences" class="cv-dynamic-container"></div>
+        </div>
+
+        <!-- Education -->
+        <div class="cv-form-section">
+            <h3 class="cv-section-header">
+                <span class="cv-section-icon">🎓</span>
+                Eğitim
+            </h3>
+            <button class="cv-add-btn" onclick="addEducation()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                Eğitim Ekle
+            </button>
+            <div id="education" class="cv-dynamic-container"></div>
+        </div>
+
+        <!-- Skills -->
+        <div class="cv-form-section">
+            <h3 class="cv-section-header">
+                <span class="cv-section-icon">⚡</span>
+                Yetenekler
+            </h3>
+            <button class="cv-add-btn" onclick="addSkill()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                Yetenek Ekle
+            </button>
+            <div id="skills" class="cv-dynamic-container"></div>
+        </div>
+
+        <!-- Languages -->
+        <div class="cv-form-section">
+            <h3 class="cv-section-header">
+                <span class="cv-section-icon">🌍</span>
+                Diller
+            </h3>
+            <button class="cv-add-btn" onclick="addLanguage()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                Dil Ekle
+            </button>
+            <div id="languages" class="cv-dynamic-container"></div>
+        </div>
+    </div>
+
+    <!-- CV Preview -->
+    <div class="cv-preview-panel">
+        <div class="cv-document" id="cv-container">
+            <!-- Left Sidebar -->
+            <div class="cv-sidebar-section">
+                <div class="cv-profile-header">
+                    <div class="cv-profile-photo" id="cv-profile-photo">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div class="cv-profile-name" id="preview-name">Ahmet Yılmaz</div>
+                    <div class="cv-profile-title" id="preview-title">Yazılım Geliştirici</div>
+                </div>
+
+                <div class="cv-contact-section">
+                    <h3 class="cv-sidebar-title">İletişim</h3>
+                    <div class="cv-contact-item">
+                        <svg class="cv-contact-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span id="preview-email" class="cv-contact-text">ahmet@example.com</span>
+                    </div>
+                    <div class="cv-contact-item">
+                        <svg class="cv-contact-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span id="preview-phone" class="cv-contact-text">+90 555 123 4567</span>
+                    </div>
+                    <div class="cv-contact-item">
+                        <svg class="cv-contact-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span id="preview-address" class="cv-contact-text">İstanbul, Türkiye</span>
+                    </div>
+                    <div class="cv-contact-item">
+                        <svg class="cv-contact-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span id="preview-website" class="cv-contact-text">linkedin.com/in/ahmetyilmaz</span>
+                    </div>
+                </div>
+
+                <div class="cv-skills-section" id="skills-section">
+                    <h3 class="cv-sidebar-title">Yetenekler</h3>
+                    <div id="preview-skills" class="cv-skills-list">
+                        <div class="cv-skill-item">
+                            <div class="cv-skill-name">JavaScript</div>
+                            <div class="cv-skill-bar">
+                                <div class="cv-skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="cv-skill-item">
+                            <div class="cv-skill-name">React</div>
+                            <div class="cv-skill-bar">
+                                <div class="cv-skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="cv-skill-item">
+                            <div class="cv-skill-name">Node.js</div>
+                            <div class="cv-skill-bar">
+                                <div class="cv-skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cv-languages-section" id="languages-section">
+                    <h3 class="cv-sidebar-title">Diller</h3>
+                    <div id="preview-languages" class="cv-languages-list">
+                        <div class="cv-language-item">
+                            <span class="cv-language-name">Türkçe</span>
+                            <div class="cv-language-level">
+                                <div class="cv-level-dot cv-level-active"></div>
+                                <div class="cv-level-dot cv-level-active"></div>
+                                <div class="cv-level-dot cv-level-active"></div>
+                                <div class="cv-level-dot cv-level-active"></div>
+                                <div class="cv-level-dot cv-level-active"></div>
+                            </div>
+                        </div>
+                        <div class="cv-language-item">
+                            <span class="cv-language-name">İngilizce</span>
+                            <div class="cv-language-level">
+                                <div class="cv-level-dot cv-level-active"></div>
+                                <div class="cv-level-dot cv-level-active"></div>
+                                <div class="cv-level-dot cv-level-active"></div>
+                                <div class="cv-level-dot cv-level-active"></div>
+                                <div class="cv-level-dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="cv-main-content">
+                <div class="cv-content-section" id="summary-section">
+                    <h2 class="cv-content-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <polyline points="14,2 14,8 20,8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Özet
+                    </h2>
+                    <div class="cv-summary-text" id="preview-summary">
+                        5+ yıl deneyimli yazılım geliştirici olarak modern web teknolojileri konusunda uzmanım.
+                        React, Node.js ve JavaScript ekosistemi ile çalışmaktan keyif alıyorum.
+                        Takım çalışmasına yatkın, problem çözme odaklı ve sürekli öğrenmeye açık bir profesyonelim.
+                    </div>
+                </div>
+
+                <div class="cv-content-section" id="experience-section">
+                    <h2 class="cv-content-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        İş Deneyimi
+                    </h2>
+                    <div id="preview-experiences" class="cv-experiences-list">
+                        <div class="cv-experience-item">
+                            <div class="cv-experience-header">
+                                <div class="cv-experience-info">
+                                    <div class="cv-experience-title">Senior Frontend Developer</div>
+                                    <div class="cv-experience-company">Tech Şirketi A.Ş.</div>
+                                </div>
+                                <div class="cv-experience-date">2021 - Devam</div>
+                            </div>
+                            <div class="cv-experience-description">
+                                Modern web uygulamaları geliştirme, takım liderliği ve kod kalitesi sağlama konularında sorumluluk aldım.
+                                React, TypeScript ve modern frontend teknolojileri kullanarak kullanıcı dostu arayüzler geliştirdim.
+                            </div>
+                        </div>
+                        <div class="cv-experience-item">
+                            <div class="cv-experience-header">
+                                <div class="cv-experience-info">
+                                    <div class="cv-experience-title">Frontend Developer</div>
+                                    <div class="cv-experience-company">Dijital Ajans XYZ</div>
+                                </div>
+                                <div class="cv-experience-date">2019 - 2021</div>
+                            </div>
+                            <div class="cv-experience-description">
+                                Müşteri projelerinde responsive web siteleri ve e-ticaret platformları geliştirdim.
+                                JavaScript, HTML5, CSS3 ve çeşitli framework'ler kullanarak projeler tamamladım.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cv-content-section" id="education-section">
+                    <h2 class="cv-content-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M6 12v5c3 3 9 3 12 0v-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Eğitim
+                    </h2>
+                    <div id="preview-education" class="cv-education-list">
+                        <div class="cv-education-item">
+                            <div class="cv-education-header">
+                                <div class="cv-education-info">
+                                    <div class="cv-education-title">Bilgisayar Mühendisliği</div>
+                                    <div class="cv-education-school">İstanbul Teknik Üniversitesi</div>
+                                </div>
+                                <div class="cv-education-date">2015 - 2019</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="cv-download-btn" onclick="downloadPDF()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <polyline points="7,10 12,15 17,10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    PDF İndir
+</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="~/js/CvScript.js"></script>

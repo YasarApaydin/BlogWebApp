@@ -1,0 +1,187 @@
+﻿
+@model MakaleListeDto
+  <!-- Page Header -->
+<div class="page-header blog-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header-content">
+                    <h1>Blog & Resources</h1>
+                    <p class="lead">Insights, tutorials, and best practices for better code quality</p>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Blog Section -->
+<section class="blog-section py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+
+
+                <!-- Blog Posts Grid -->
+                <div class="blog-posts">
+                    <div class="row g-4">
+                        @foreach (var item in Model.Articles)
+                        {
+                            <div class="col-md-6">
+
+
+
+
+                                <div class="post-card">
+                                    <div class="post-image">
+                                        <img src="https://images.pexels.com/photos/1181290/pexels-photo-1181290.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Security Best Practices" class="img-fluid">
+                                        <div class="post-category security">
+                                            <i class="fas fa-shield-alt me-1"></i>@item.Kategori.Ad
+                                        </div>
+                                    </div>
+                                    <div class="post-content">
+                                        <div class="post-meta">
+                                            <span class="post-date">
+                                                <i class="far fa-calendar-alt me-1"></i>@item.YayinlanmaTarihi.ToString("dd/MM/yyyy")
+                                            </span>
+                                            <span class="post-author">
+                                                <i class="far fa-user me-1"></i>@item.User.FirstName @item.User.LastName
+                                            </span>
+                                            <span class="post-comments">
+                                                <i class="far fa-comments me-1"></i><font style="vertical-align: inherit;">
+                                                    <font style="vertical-align: inherit;">
+                                                        @item.Yorums?.Count() ?? 0 Yorum
+                                                    </font>
+                                                </font>
+                                            </span>
+
+                                            <span class="post-comments">
+                                                <i class="far fa-eye me-1"></i><font style="vertical-align: inherit;">
+                                                    <font style="vertical-align: inherit;">
+                                                        @item.Goruntuleme Görüntülenme
+                                                    </font>
+                                                </font>
+                                            </span>
+                                        </div>
+                                        <h3><a asp-action="Detail" asp-controller="Blog" asp-route-id="@item.Slug">@item.Baslik</a></h3>
+                                        <p>
+                                            @(item.Ozet?.Length > 20
+                                                ? item.Ozet.Substring(0, 20) + "..."
+                                                : item.Ozet)
+                                        </p>
+
+                                        <a asp-action="Detail" asp-controller="Blog" asp-route-id="@item.Slug" class="btn btn-outline-primary btn-sm">
+                                            <i class="fas fa-arrow-right me-1"></i>Read More
+                                        </a>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        }
+                    </div>
+                </div>
+
+
+
+                <!-- Pagination -->
+                <nav aria-label="Blog pagination" class="mt-5">
+                    <ul class="pagination justify-content-center">
+
+
+                        @if (Model.ShowPrevious)
+                        {
+                            <li class="page-item "><a class="page-link" asp-route-currentPage="@(Model.CurrentPage - 1)" asp-route-pageSize="@Model.PageSize">Önceki</a></li>
+                        }
+
+                        @for (int i = 1; i < Model.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+
+                                <a class="page-link" asp-route-currentPage="@i" asp-route-pageSize="@Model.PageSize">@i</a>
+                            </li>
+
+
+                        }
+                        @if (Model.ShowNext)
+                        {
+                            <li class="page-item "><a class="page-link" asp-route-currentPage="@(Model.CurrentPage + 1)" asp-route-pageSize="@Model.PageSize">Sonraki</a></li>
+                        }
+
+
+
+                    </ul>
+                </nav>
+
+
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="blog-sidebar">
+                    <!-- Search -->
+                    <div class="sidebar-widget">
+                        <h4 class="widget-title">Search</h4>
+                        <form asp-controller="Blog" asp-action="Search" method="get" class="search-form">
+                            <div class="input-group">
+                                <input type="text" name="keyword" class="form-control" placeholder="Search articles...">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    <!-- Recent Posts -->
+                    <div class="sidebar-widget">
+                        <h4 class="widget-title">Recent Posts</h4>
+                        <div class="recent-posts">
+                            <div class="recent-post">
+                                <div class="post-thumb">
+                                    <img src="https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Recent Post">
+                                </div>
+                                <div class="post-info">
+                                    <h5><a href="post-details.html">10 Essential Code Quality Metrics</a></h5>
+                                    <span class="post-date">June 24, 2024</span>
+                                </div>
+                            </div>
+                            <div class="recent-post">
+                                <div class="post-thumb">
+                                    <img src="https://images.pexels.com/photos/1181290/pexels-photo-1181290.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Recent Post">
+                                </div>
+                                <div class="post-info">
+                                    <h5><a href="post-details.html">Security Best Practices</a></h5>
+                                    <span class="post-date">June 20, 2024</span>
+                                </div>
+                            </div>
+                            <div class="recent-post">
+                                <div class="post-thumb">
+                                    <img src="https://images.pexels.com/photos/4348404/pexels-photo-4348404.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Recent Post">
+                                </div>
+                                <div class="post-info">
+                                    <h5><a href="post-details.html">JavaScript Performance Optimization</a></h5>
+                                    <span class="post-date">June 18, 2024</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget text-center mt-4">
+                        <a href="/Blog/Create" class="btn-create-post">Blog Yazısı Oluştur</a>
+                    </div>
+
+                    @await Component.InvokeAsync("HomeCategories")
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

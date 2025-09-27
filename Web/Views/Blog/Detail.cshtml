@@ -1,0 +1,230 @@
+﻿@model YorumMakaleDto
+
+
+<!-- Page Header -->
+<div class="page-header blog-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header-content">
+                    <h1>Post Details</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Home</a></li>
+                            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Blog">Blog</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Post Details</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Post Content -->
+<section class="post-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="post-content-wrapper">
+                    <div class="post-header">
+                        <div class="post-categories">
+                            <a href="#" class="post-category development">
+                                <i class="fas fa-code me-1"></i>Development
+                            </a>
+                            <a href="#" class="post-category quality">
+                                <i class="fas fa-star me-1"></i>Code Quality
+                            </a>
+                        </div>
+                        <h1 class="post-title">@Model.MakaleDto.Baslik</h1>
+
+                        <div class="post-tags mb-3">
+                            <i class="fas fa-tags me-2"></i>
+                            @foreach (var tag in Model.MakaleDto.Tags)
+                            {
+                                <a href="/Blog/Tag/@tag" class="badge bg-secondary me-1">@tag.Ad</a>
+                            }
+                        </div>
+
+
+                        <div class="post-meta">
+                            <div class="post-author">
+
+                                <img src="@Model.MakaleDto.User.Resim.DosyaYolu" alt="@Model.MakaleDto.User.FirstName" class="author-avatar">
+
+                                <span>By @Model.MakaleDto.User.FirstName @Model.MakaleDto.User.LastName</span>
+                            </div>
+                            <div class="post-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>@Model.MakaleDto.YayinlanmaTarihi.ToString("dd/MM/yyyy")</span>
+                            </div>
+                            <div class="post-comments">
+                                <i class="far fa-comments"></i>
+                                <span>@(Model.MakaleDto.Yorums?.Count() ?? 0 )  Yorum</span>
+                            </div>
+
+
+                            <div class="post-comments">
+                                <i class="far fa-eye me-1"></i><font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">
+                                        @Model.MakaleDto.Goruntuleme Görüntülenme
+                                    </font>
+                                </font>
+                            </div>
+                            <div class="post-reading-time">
+                                <i class="far fa-clock"></i>
+                                <span>
+                                    @{
+                                        var yayinlanmaTarihi = Model.MakaleDto.YayinlanmaTarihi;
+                                        var simdi = DateTime.Now;
+                                        var fark = simdi - yayinlanmaTarihi;
+
+                                        string zamanBilgisi;
+
+                                        if (fark.TotalDays >= 1)
+                                        {
+                                            zamanBilgisi = $"{(int)fark.TotalDays} gün önce";
+                                        }
+                                        else if (fark.TotalHours >= 1)
+                                        {
+                                            zamanBilgisi = $"{(int)fark.TotalHours} saat önce";
+                                        }
+                                        else
+                                        {
+                                            zamanBilgisi = $"{(int)fark.TotalMinutes} dakika önce";
+                                        }
+                                    }  @zamanBilgisi
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="post-featured-image text-center">
+                        @{
+
+
+                            var resimYolu = Url.Content($"{Model.MakaleDto.Resim.DosyaYolu}");
+                            var varsayilanResimYolu = "https://i.ibb.co/Y49Rj1PS/default-article.jpg";
+                        }
+                        @if (!resimYolu.Equals(varsayilanResimYolu, StringComparison.OrdinalIgnoreCase))
+                        {
+                           <img src="@resimYolu" alt="@Model.MakaleDto.Baslik" width="100" class="custom-article-image">
+                        }
+
+                    </div>
+                    <blockquote class="blockquote border-start ps-3 mb-4">
+                        <p class="mb-0"> @Html.Raw(Model.MakaleDto.Ozet.ToHtmlWithBreaks())</p>
+                    </blockquote>
+
+
+
+                    <div class="post-body">
+                        @Html.Raw(Model.MakaleDto.Icerik.ToHtmlWithBreaks())
+                    </div>
+
+
+
+                    <!-- Author Bio -->
+
+                </div>
+
+                <!-- Comments Section -->
+
+                @if (Model.MakaleDto.YorumlaraIzinVer)
+                {
+                    <div class="comments-section">
+
+
+
+
+                        <!-- Comment Form -->
+                        <div class="comment-form mt-5">
+                            <h4 class="mb-4">Yorum Yap</h4>
+
+                            <form asp-action="Detail" asp-controller="Blog" method="post" class="needs-validation" novalidate>
+
+                                <input type="hidden" asp-for="MakaleYorumEkleDto.MakaleId" />
+
+                                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                                <div class="mb-3">
+                                    <label asp-for="MakaleYorumEkleDto.Icerik" class="form-label">Yorumunuz</label>
+                                    <textarea asp-for="MakaleYorumEkleDto.Icerik" class="form-control" rows="5" placeholder="Yorumunuzu buraya yazın..." required></textarea>
+                                    <span asp-validation-for="MakaleYorumEkleDto.Icerik" class="text-danger"></span>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane me-2"></i>Post Comment
+                                </button>
+
+                            </form>
+                        </div>
+
+
+
+
+
+
+
+
+                        <!-- Comments List -->
+
+                        <div class="comments-list">
+
+                            @foreach (var item in Model.MakaleDto.Yorums)
+                            {
+                                <div class="comment">
+
+                                    <img src="@(Url.Content($"{item.User.Resim.DosyaYolu}"))" alt="Varsayılan Kullanıcı" class="comment-avatar">
+
+
+                                    <div class="comment-content">
+                                        <div class="comment-header">
+
+                                            <h6>@item.User.FirstName @item.User.LastName</h6>
+                                            <span class="comment-date">
+                                                @{
+                                                    var yayinlanmaTarihi1 = item.YorumTarihi;
+                                                    var simdi1 = DateTime.Now;
+                                                    var fark1 = simdi1 - yayinlanmaTarihi1;
+
+                                                    string zamanBilgisi1;
+
+                                                    if (fark1.TotalDays >= 1)
+                                                    {
+                                                        zamanBilgisi1 = $"{(int)fark1.TotalDays} gün önce";
+                                                    }
+                                                    else if (fark1.TotalHours >= 1)
+                                                    {
+                                                        zamanBilgisi1 = $"{(int)fark1.TotalHours} saat önce";
+                                                    }
+                                                    else
+                                                    {
+                                                        zamanBilgisi1 = $"{(int)fark1.TotalMinutes} dakika önce";
+                                                    }
+                                                }
+                                                @zamanBilgisi1
+                                            </span>
+                                        </div>
+                                        <p>@Html.Raw(item.Icerik.ToHtmlWithBreaks())</p>
+                                    </div>
+                                </div>
+                            }
+
+
+
+                        </div>
+
+
+
+                    </div>
+                }
+
+
+
+            </div>
+
+         
+        </div>
+    </div>
+</section>

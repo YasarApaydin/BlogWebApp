@@ -1,0 +1,63 @@
+﻿@model List<KategoriDto>
+
+<div class="page-header">
+    <div class="header-title">
+        <h2>Cöp Kutusu</h2>
+        <p>Kategoriler</p>
+    </div>
+    
+</div>
+
+
+<div class="responsive-table-container" style="overflow:hidden;">
+    <table class="table table-responsive"  cellspacing="0">
+        <thead>
+            <tr>
+                <th>İsim</th>
+                <th>Oluşturulma Tarihi</th>
+                <th>Oluşturan</th>
+                <th>Durum</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr name="@item.Id">
+                    <td>@item.Ad</td>
+                    <td>@item.OlusturulmaTarihi.ToShortDateString()</td>
+
+                    <td>
+                        <div class="user-cell">
+                            <img src="https://ui-avatars.com/api/?name=Ahmet+Yılmaz" alt="Ahmet Y.">
+                            <div class="user-info">
+                                <h4>@item.OlusturanKullanici</h4>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <span class="badge-status active">@(item.IsDeleted ? "Pasif":"Aktif")</span>
+                    </td>
+                    <td>
+                        <div class="actions">
+                            <a data-id="@item.Id" asp-area="Admin" asp-controller="Category" asp-action="UndoDelete" asp-route-categoryid="@item.Id" class="action-btn edit-btn">
+                                <i class="bx bx-undo"></i>
+                                Düzenle
+                            </a>
+                            @*<a data-id="@item.Id" asp-area="Admin" asp-controller="Category" asp-action="Delete" asp-route-categoryid="@item.Id" style="text-decoration:none;" class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                                Sil
+                            </a>*@
+                        </div>
+                    </td>
+                </tr>
+
+            }
+
+
+
+
+        </tbody>
+    </table>
+</div>
