@@ -92,9 +92,9 @@ Bu proje, SOLID prensiplerine uygun, sürdürülebilir ve genişletilebilir bir 
 
 ## 📸 Örnek Ekran Görüntüleri
 
-| Dashboard | Profil Sayfası | Makale Oluştur |
-|----------|----------------|----------------|
-| ![dash](https://i.ibb.co/wZ40HLQD/Ekran-g-r-nt-s-2025-09-27-154058.png) ![dash](https://i.ibb.co/9KNnqhw/Ekran-g-r-nt-s-2025-09-27-154124.png) | ![profil](https://i.ibb.co/WNpjtt1S/Ekran-g-r-nt-s-2025-09-26-182313.png) ![profil] ![profil](https://i.ibb.co/1YSWKFyX/Ekran-g-r-nt-s-2025-09-27-154526.png) | ![makale](https://i.ibb.co/wrw4Xwpj/Ekran-g-r-nt-s-2025-09-26-182131.png)  ![makale](https://i.ibb.co/p6Bd45tB/Ekran-g-r-nt-s-2025-09-27-152800.png)|
+| Dashboard | Profil Sayfası | Makale Oluştur | Email Doğrulama |
+|----------|----------------|----------------|----------------|
+| ![dash](https://i.ibb.co/wZ40HLQD/Ekran-g-r-nt-s-2025-09-27-154058.png) ![dash](https://i.ibb.co/9KNnqhw/Ekran-g-r-nt-s-2025-09-27-154124.png) | ![profil](https://i.ibb.co/WNpjtt1S/Ekran-g-r-nt-s-2025-09-26-182313.png) ![profil] ![profil](https://i.ibb.co/1YSWKFyX/Ekran-g-r-nt-s-2025-09-27-154526.png) | ![makale](https://i.ibb.co/wrw4Xwpj/Ekran-g-r-nt-s-2025-09-26-182131.png)  ![makale](https://i.ibb.co/p6Bd45tB/Ekran-g-r-nt-s-2025-09-27-152800.png)|![email](https://i.ibb.co/whhf8NT9/Ekran-g-r-nt-s-2025-09-26-183216.png) |
 
 ---
 
